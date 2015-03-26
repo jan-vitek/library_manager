@@ -4,28 +4,15 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 
 use App\Author;
-use Nayjest\Grids\Grid;
-use Nayjest\Grids\GridConfig;
-use Nayjest\Grids\EloquentDataProvider;
-use Nayjest\Grids\IdFieldConfig;
-use Nayjest\Grids\FieldConfig;
-use Nayjest\Grids\FilterConfig;
-use Nayjest\Grids\SelectFilterConfig;
-use Nayjest\Grids\Components\THead;
-use Nayjest\Grids\Components\FiltersRow;
-use Nayjest\Grids\Components\OneCellRow;
-use Nayjest\Grids\Components\RecordsPerPage;
-use Nayjest\Grids\Components\ColumnsHider;
-use Nayjest\Grids\Components\HtmlTag;
-use Nayjest\Grids\Components\TFoot;
-use Nayjest\Grids\Components\TotalsRow;
-use Nayjest\Grids\Components\Pager;
 
 use Zofe\Rapyd\DataGrid\DataGrid;
 use Zofe\Rapyd\DataFilter\DataFilter;
-use Illuminate\View\View;
+use Zofe\Rapyd\DataForm\DataForm;
+use Zofe\Rapyd\DataEdit\DataEdit;
 
 class AuthorsController extends Controller {
 
@@ -45,12 +32,12 @@ class AuthorsController extends Controller {
 
             $grid = DataGrid::source($filter);  //same source types of DataSet
 
-            $grid->add('name','Jméno', true); //field name, label, sortable
+            // this creates link to the object, if copy&paste to another controller change AuthorsController@show (target of the link), $name (text to be displayed), 'Jméno' (title of the column) and 'name' (sort by)
+            $grid->add('{!! link_to_action(\'AuthorsController@show\', $name, $parameters = array("id" => $id), $attributes = array()) !!}','Jméno', 'name'); //field name, label, sortable
             $grid->add('birth_year', 'Narozen', false);
+            $grid->edit('/authors', 'Edit','show|modify|delete');
             $grid->orderBy('id','desc'); //default orderby
             $grid->paginate(10); //pagination
-
-            //View::make('authors.index', compact('grid'));
 
             return view('authors.index', compact('grid', 'filter'));
 	}
@@ -62,7 +49,8 @@ class AuthorsController extends Controller {
 	 */
 	public function create()
 	{
-		//
+            $form = $this->form();
+            return view('authors.form', compact('form'));
 	}
 
 	/**
@@ -72,7 +60,12 @@ class AuthorsController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		$input = Input::all();
+                //if "" is stored as number it becomes 0, solution is to replace "" by null
+                if ($input["birth_year"] == "") $input["birth_year"] = null;
+	        Author::create( $input );
+ 
+         	return Redirect::route('authors.index')->with('message', 'Author created');
 	}
 
 	/**
@@ -83,7 +76,8 @@ class AuthorsController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+	    $form = $this->form(Author::find($id), "show");
+            return view('authors.form', compact('form'));
 	}
 
 	/**
@@ -94,7 +88,8 @@ class AuthorsController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+            $form = $this->form(Author::find($id), "modify", "authors/".$id);
+            return view('authors.form', compact('form'));
 	}
 
 	/**
@@ -105,7 +100,11 @@ class AuthorsController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+	    $input = array_except(Input::all(), '_method');
+            if ($input["birth_year"] == "") $input["birth_year"] = null;
+	    Author::find($id)->update($input);
+ 
+            return Redirect::route('authors.index')->with('message', 'Author updated.');
 	}
 
 	/**
@@ -116,7 +115,25 @@ class AuthorsController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+	    Author::find($id)->delete();
+            return Redirect::route('authors.index')->with('message', 'Author deleted.');
 	}
+
+        private function form($model = null, $status = "", $process_url = "authors")
+        {
+            //start with empty form to create new Article
+            $form = DataEdit::source(new Author);
+            $form->process_url = $process_url;
+            $form->back_url = "authors";
+            $form->model = $model;
+            if ($status != "") $form->status = $status;
+            //add fields to the form
+            $form->text('name','Jméno')->rule('required'); //field name, label, type
+            $form->text('birth_year','Rok narození');
+            $form->textarea('note', 'Poznámka');
+ 
+
+            return $form;
+        }
 
 }

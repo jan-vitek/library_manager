@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-{{ Rapyd::head() }}
-</head>
-<body>
+@include('app')
+
 {!! $filter !!}
 {!! $grid !!}
-</body>
-</html>
+<br>
+{!! link_to_action('AuthorsController@create', "Přidat", $parameters = array(), $attributes = array("class" => "btn btn-primary")); !!}
+

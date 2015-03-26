@@ -1,0 +1,7 @@
+vendor/zofe/rapyd/views/datagrid.blade.php:            <td{!! $cell->buildAttributes() !!}>{!! $cell->value !!}</td>
+vendor/zofe/rapyd/src/DataGrid/Row.php:        if (!in_array($cell->name,$this->cell_names)) array_push($this->cell_names,$cell->name);
+vendor/zofe/rapyd/src/DataGrid/Row.php:            $values[] = $cell->value;
+vendor/zofe/rapyd/src/DataGrid/DataGrid.php:                $cell->value($value);
+vendor/zofe/rapyd/src/DataGrid/DataGrid.php:                $cell->parseFilters($column->filters);
+vendor/zofe/rapyd/src/DataGrid/DataGrid.php:                    $cell->value($callable($cell->value));
+vendor/zofe/rapyd/src/DataGrid/DataGrid.php:                $cell->value($value);

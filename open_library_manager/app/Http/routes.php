@@ -13,4 +13,8 @@
 
 Route::get('/', 'WelcomeController@index');
 
+//Route::get('authors/crud', 'AuthorsController@crud');
+
 Route::resource('authors', 'AuthorsController');
+Route::get('authors/{id}/destroy', ['uses' =>'AuthorsController@destroy']);
+Route::post('authors/{id}', ['uses' =>'AuthorsController@update']);

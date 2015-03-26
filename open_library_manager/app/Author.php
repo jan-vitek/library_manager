@@ -9,7 +9,7 @@ class Author extends Model {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'birth_year', 'password'];
+	protected $fillable = ['name', 'birth_year', 'note'];
 	
 	
         public function titles()
