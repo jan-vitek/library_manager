@@ -1,14 +1,10 @@
-<!DOCTYPE html>
 <html>
-<head>
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/local.css">
-<script src="js/jquery-1.10.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<title>Knihovna katedry kybernetiky</title>
-{!! Rapyd::head() !!}
-</head>
-<body style="background-color:#0066cc">
+  <head>
+    <title>Knihovna katedry kybernetiky</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/local.css">
+  </head>
+  <body style="background-color:#0066cc">
 
  <div id="wrapper">
 
@@ -22,12 +18,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="authors">Autoři</a>
-                </li>
-                <li>
-                    <a href="/">Hlavní strana 
-                    <span class="glyphicon glyphicon-home"></span>
-                    </a>
+                    <a href="authors">Authors</a>
                 </li>
             </ul>
         </div>
@@ -38,9 +29,7 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-lg-12">
-              
-              @yield('content')
-              
+              <h1 style="color:white">Knihovna katedry kybernetiky</h1>
               </div>
             </div>
           </div>
@@ -48,6 +37,15 @@
         <!-- /#page-content-wrapper -->
 
     </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery-1.11.2.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    
+
 
   </body>
   </html>

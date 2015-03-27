@@ -18,3 +18,7 @@ Route::get('/', 'WelcomeController@index');
 Route::resource('authors', 'AuthorsController');
 Route::get('authors/{id}/destroy', ['uses' =>'AuthorsController@destroy']);
 Route::post('authors/{id}', ['uses' =>'AuthorsController@update']);
+
+Route::resource('titles', 'TitlesController');
+Route::get('titles/{id}/destroy', ['uses' =>'TitlesController@destroy']);
+Route::post('titles/{id}', ['uses' =>'TitlesController@update']);
