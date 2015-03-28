@@ -1106,7 +1106,7 @@ a {
 }
 a:hover,
 a:focus {
-  color: #23527c;
+  color: #fff !important;
   text-decoration: underline;
 }
 a:focus {
@@ -3898,7 +3898,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .nav > li.disabled > a:hover,
 .nav > li.disabled > a:focus {
-  color: #777;
+  color: #b74934;
   text-decoration: none;
   cursor: not-allowed;
   background-color: transparent;
@@ -6581,4 +6581,6 @@ button.close {
     display: none !important;
   }
 }
+
+
 /*# sourceMappingURL=bootstrap.css.map */

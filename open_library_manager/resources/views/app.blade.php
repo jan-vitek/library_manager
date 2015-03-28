@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/local.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/local.css">
 <script src="js/jquery-1.10.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <title>Knihovna katedry kybernetiky</title>
@@ -22,7 +22,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="authors">Autoři</a>
+                    <a href="/authors">Autoři</a>
                 </li>
                 <li>
                     <a href="/">Hlavní strana 

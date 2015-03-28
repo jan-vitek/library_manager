@@ -29,15 +29,34 @@ class AuthorsController extends Controller {
             $filter->add('name','Jméno', 'text');
             $filter->submit('Hledat');
             $filter->reset('reset');
-
             $grid = DataGrid::source($filter);  //same source types of DataSet
 
             // this creates link to the object, if copy&paste to another controller change AuthorsController@show (target of the link), $name (text to be displayed), 'Jméno' (title of the column) and 'name' (sort by)
-            $grid->add('{!! link_to_action(\'AuthorsController@show\', $name, $parameters = array("id" => $id), $attributes = array()) !!}','Jméno', 'name'); //field name, label, sortable
+            //$grid->add('name','Jméno')->style("color:#FFFFFF");  //field name, label, sortable
+            
+            $grid->add('{!! link_to_action(\'AuthorsController@show\', $name, $parameters = array("id" => $id), $attributes = array()) !!}','Jméno', 'name');  //field name, label, sortable
+            
             $grid->add('birth_year', 'Narozen', false);
             $grid->edit('/authors', 'Edit','show|modify|delete');
             $grid->orderBy('id','desc'); //default orderby
             $grid->paginate(10); //pagination
+
+
+            /**
+            *modification
+            *
+            */
+            /*
+            $grid->row(function ($row) {
+
+                $row->cell('name')->style("color:#FFFFFF");
+                $row->style("background-color:#0091FF");
+            
+            });
+*/
+
+
+
 
             return view('authors.index', compact('grid', 'filter'));
 	}
